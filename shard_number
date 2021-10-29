@@ -1,8 +1,8 @@
 #!/bin/bash
 DPATH="/etc/jitsi/videobridge/sip-communicator.properties"
 set -x
-k=$(grep -o 'shard-1' $DPATH | sort -u) # shard ends by a number#
-i=$(grep -o 'shard-1' $DPATH | sort -u | cut -c7)
+k=$(grep -o -E 'shard-[0-9]+' $DPATH | sort -u) # shard ends by a number#
+i=$(grep -o -E 'shard-[0-9]+' $DPATH | sort -u | cut -c7)
 m=$((i+1))
 n="shard-$m"
 sed -i "s|${k}|${n}|g" $DPATH
